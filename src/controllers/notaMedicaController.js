@@ -1,0 +1,55 @@
+const { createNotaMedica, getNotasMedicasByPaciente, updateNotaMedica } = require('../services/notaMedicaService');
+
+// Crear una nueva nota médica
+const crearNotaMedica = async (req, res) => {
+  const { pacienteId, titulo, contenido } = req.body;
+  const autorId = req.usuario.id; // ID del usuario autenticado
+
+  try {
+    const notaMedica = await createNotaMedica(pacienteId, autorId, titulo, contenido);
+
+    // Emitir evento en tiempo real
+    const io = req.app.get('io');
+    io.to(`patient_${pacienteId}`).emit('nuevaNotaMedica', notaMedica);
+
+    res.status(201).json(notaMedica);
+  } catch (error) {
+    res.status(500).json({ message: 'Error al crear la nota médica' });
+  }
+};
+
+// Obtener notas médicas de un paciente
+const obtenerNotasMedicas = async (req, res) => {
+  const { pacienteId } = req.params;
+
+  try {
+    const notasMedicas = await getNotasMedicasByPaciente(pacienteId);
+    res.json(notasMedicas);
+  } catch (error) {
+    res.status(500).json({ message: 'Error al obtener las notas médicas' });
+  }
+};
+
+// Actualizar una nota médica
+const actualizarNotaMedica = async (req, res) => {
+  const { notaId } = req.params;
+  const { titulo, contenido } = req.body;
+
+  try {
+    const notaActualizada = await updateNotaMedica(notaId, titulo, contenido);
+
+    // Emitir evento en tiempo real (opcional)
+    const io = req.app.get('io');
+    io.to(`patient_${notaActualizada.PacienteID}`).emit('notaMedicaActualizada', notaActualizada);
+
+    res.json(notaActualizada);
+  } catch (error) {
+    res.status(500).json({ message: 'Error al actualizar la nota médica' });
+  }
+};
+
+module.exports = {
+  crearNotaMedica,
+  obtenerNotasMedicas,
+  actualizarNotaMedica,
+};
