@@ -1,0 +1,27 @@
+{
+  "name": "qfinder-backend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "cross-env NODE_ENV=development node src/server.js",
+    "dev": "cross-env NODE_ENV=development nodemon src/server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "cors": "^2.8.5",
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "helmet": "^8.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "morgan": "^1.10.0",
+    "mysql2": "^3.13.0",
+    "nodemon": "^3.1.9",
+    "sequelize": "^6.37.6",
+    "socket.io": "^4.8.1"
+  }
+}
