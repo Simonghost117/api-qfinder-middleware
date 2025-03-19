@@ -1,18 +1,22 @@
 const express = require('express');
-const { crearNotaMedica, obtenerNotasMedicas, actualizarNotaMedica } = require('../controllers/notaMedicaController');
+const { crearNotaMedica, obtenerNotasMedicas, actualizarNotaMedica } = require('../controllers/notaMedicaController.js');
 const authMiddleware = require('../middlewares/authMiddleware');
 const roleMiddleware = require('../middlewares/roleMiddleware');
 const validationMiddleware = require('../middlewares/validationMiddleware');
 const { validacionesCrearNotaMedica, validacionesObtenerNotasMedicas, validacionesActualizarNotaMedica } = require('../validators/notaMedicaValidations');
+const validateSchema = require('../middlewares/validatore.schema.js')
+const {NotaSchema} = require('../schema/notas.schema.js')
+
 
 const router = express.Router();
 
 // Crear una nueva nota médica
 router.post(
   '/notas-medicas',
-  authMiddleware,
-  roleMiddleware(['Acudiente', 'Empresa']),
-  validationMiddleware(validacionesCrearNotaMedica),
+  validateSchema(NotaSchema),
+  // authMiddleware,
+  // roleMiddleware(['Acudiente', 'Empresa']),
+  // validationMiddleware(validacionesCrearNotaMedica),
   crearNotaMedica
 );
 

@@ -1,12 +1,13 @@
+const e = require('express');
 const { createNotaMedica, getNotasMedicasByPaciente, updateNotaMedica } = require('../services/notaMedicaService');
 
 // Crear una nueva nota médica
 const crearNotaMedica = async (req, res) => {
-  const { pacienteId, titulo, contenido } = req.body;
-  const autorId = req.usuario.id; // ID del usuario autenticado
+  const { titulo, pacienteId, autorId, contenido, imagen } = req.body;
+  // const autorId = req.usuario.id; // ID del usuario autenticado
 
   try {
-    const notaMedica = await createNotaMedica(pacienteId, autorId, titulo, contenido);
+    const notaMedica = await createNotaMedica(titulo, pacienteId, autorId, contenido, imagen);
 
     // Emitir evento en tiempo real
     const io = req.app.get('io');
@@ -14,7 +15,7 @@ const crearNotaMedica = async (req, res) => {
 
     res.status(201).json(notaMedica);
   } catch (error) {
-    res.status(500).json({ message: 'Error al crear la nota médica' });
+    res.status(500).json({ message: 'Error al crear la nota médica', error });
   }
 };
 

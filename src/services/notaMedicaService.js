@@ -1,11 +1,12 @@
-const { NotaMedica, Usuario } = require('../models');
+const { NotaMedica } = require('../models/notaMedica.js');
 
-const createNotaMedica = async (pacienteId, autorId, titulo, contenido) => {
+const createNotaMedica = async (titulo, pacienteId, autorId, contenido, imagen) => {
   const notaMedica = await NotaMedica.create({
     Titulo: titulo,
     PacienteID: pacienteId,
     AutorID: autorId,
     Contenido: contenido,
+    Imagen: imagen,
   });
 
   return notaMedica;
