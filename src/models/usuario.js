@@ -1,5 +1,5 @@
-const { DataTypes } = require('sequelize');
-const sequelize = require('../config/db');
+import { DataTypes } from 'sequelize';
+import sequelize from '../config/db.js';
 
 const Usuario = sequelize.define('Usuario', {
     IDUsuario: { 
@@ -19,4 +19,4 @@ const Usuario = sequelize.define('Usuario', {
     freezeTableName: true 
 });
 
-module.exports = Usuario;
+export default  Usuario;
