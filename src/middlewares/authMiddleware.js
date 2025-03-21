@@ -2,7 +2,8 @@ const jwt = require('jsonwebtoken');
 const { UnauthorizedError } = require('../utils/errors');
 
 const authMiddleware = (req, res, next) => {
-  const token = req.header('Authorization')?.replace('Bearer ', '');
+  // const token = req.header('Authorization')?.replace('Bearer ', '');
+  const { token } = req.cookies;
 
   if (!token) {
     throw new UnauthorizedError('Acceso denegado. No se proporcionó token.');

@@ -81,8 +81,9 @@ export const login = async (req, res) => {
     const token = jwt.sign(
       { id: usuario.IDUsuario, rol: usuario.RolID },
       process.env.JWT_SECRET,
-      { expiresIn: "2h" }
+      { expiresIn: "1h" }
     );
+    res.cookie('token', token);
     
     res.json({ token, rol: usuario.RolID });
   } catch (error) {

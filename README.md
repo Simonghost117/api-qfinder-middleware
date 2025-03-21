@@ -46,6 +46,8 @@ morgan: Para el logging de las solicitudes HTTP.
 
 socket.io: Para la comunicación en tiempo real.
 
+zod: Crear esquemas definidos para estructuras de datos.
+
 Dependencias de Desarrollo
 nodemon: Para reiniciar automáticamente el servidor durante el desarrollo.
 

@@ -3,8 +3,8 @@ const { createNotaMedica, getNotasMedicasByPaciente, updateNotaMedica } = requir
 
 // Crear una nueva nota médica
 const crearNotaMedica = async (req, res) => {
-  const { titulo, pacienteId, autorId, contenido, imagen } = req.body;
-  // const autorId = req.usuario.id; // ID del usuario autenticado
+  const { titulo, pacienteId, contenido, imagen } = req.body;
+  const autorId = req.usuario.id; // ID del usuario autenticado
 
   try {
     const notaMedica = await createNotaMedica(titulo, pacienteId, autorId, contenido, imagen);

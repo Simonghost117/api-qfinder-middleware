@@ -9,6 +9,11 @@ const errorHandler = require('./middlewares/errorHandler');
 
 const app = express();
 
+const cookieParser=  require('cookie-parser');
+
+// Asegúrate de usar cookie-parser antes de tus rutas
+app.use(cookieParser());
+
 // Middlewares
 app.use(cors());
 app.use(helmet());

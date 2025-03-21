@@ -6,6 +6,7 @@ const validationMiddleware = require('../middlewares/validationMiddleware');
 const { validacionesCrearNotaMedica, validacionesObtenerNotasMedicas, validacionesActualizarNotaMedica } = require('../validators/notaMedicaValidations');
 const validateSchema = require('../middlewares/validatore.schema.js')
 const {NotaSchema} = require('../schema/notas.schema.js')
+const {authRequired} = require('../middlewares/validate.token.js')
 
 
 const router = express.Router();
@@ -13,10 +14,11 @@ const router = express.Router();
 // Crear una nueva nota médica
 router.post(
   '/notas-medicas',
-  validateSchema(NotaSchema),
+  authRequired,
   // authMiddleware,
-  // roleMiddleware(['Acudiente', 'Empresa']),
-  // validationMiddleware(validacionesCrearNotaMedica),
+  // roleMiddleware(['Cuidador', 'Entidad']),
+  // validationMiddleware(validacionesCrearNotaMedica), //El error se encuentra en estas 3 lineas
+  validateSchema(NotaSchema),
   crearNotaMedica
 );
 
