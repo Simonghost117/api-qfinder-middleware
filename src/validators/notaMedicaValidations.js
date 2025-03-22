@@ -1,7 +1,7 @@
-const { check, param } = require('express-validator');
+import { check, param } from 'express-validator';
 
 // Validaciones para crear una nota médica
-const validacionesCrearNotaMedica = [
+export const validacionesCrearNotaMedica = [
   check('pacienteId')
     .isInt()
     .withMessage('El ID del paciente debe ser un número entero.')
@@ -23,7 +23,7 @@ const validacionesCrearNotaMedica = [
 ];
 
 // Validaciones para obtener notas médicas de un paciente
-const validacionesObtenerNotasMedicas = [
+export const validacionesObtenerNotasMedicas = [
   param('pacienteId')
     .isInt()
     .withMessage('El ID del paciente debe ser un número entero.')
@@ -31,7 +31,7 @@ const validacionesObtenerNotasMedicas = [
 ];
 
 // Validaciones para actualizar una nota médica
-const validacionesActualizarNotaMedica = [
+export const validacionesActualizarNotaMedica = [
   param('notaId')
     .isInt()
     .withMessage('El ID de la nota médica debe ser un número entero.')
@@ -53,9 +53,3 @@ const validacionesActualizarNotaMedica = [
     .withMessage('El contenido no puede tener más de 1000 caracteres.')
     .trim(),
 ];
-
-module.exports = {
-  validacionesCrearNotaMedica,
-  validacionesObtenerNotasMedicas,
-  validacionesActualizarNotaMedica,
-};

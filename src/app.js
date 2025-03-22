@@ -1,15 +1,14 @@
-// src/app.js
-const express = require('express');
-const cors = require('cors');
-const helmet = require('helmet');
-const morgan = require('morgan');
-const authRoutes = require('./routes/authRoutes');
-const notaMedicaRoutes = require('./routes/notaMedicaRoutes');
-const errorHandler = require('./middlewares/errorHandler');
+import express from 'express';
+import cors from 'cors';
+import helmet from 'helmet';
+import morgan from 'morgan';
+import cookieParser from 'cookie-parser';
+
+import authRoutes from './routes/authRoutes.js';
+import notaMedicaRoutes from './routes/notaMedicaRoutes.js';
+import errorHandler from './middlewares/errorHandler.js';
 
 const app = express();
-
-const cookieParser=  require('cookie-parser');
 
 // Asegúrate de usar cookie-parser antes de tus rutas
 app.use(cookieParser());
@@ -19,14 +18,17 @@ app.use(cors());
 app.use(helmet());
 app.use(morgan('dev'));
 app.use(express.json());
+
+// Ruta de prueba
 app.get('/test', (req, res) => {
-    res.json({ message: 'El servidor está funcionando correctamente' });
-  });
-// Usar los routers
+  res.json({ message: 'El servidor está funcionando correctamente' });
+});
+
+// Rutas
 app.use('/api/auth', authRoutes);
 app.use('/api', notaMedicaRoutes);
 
 // Manejo de errores
 app.use(errorHandler);
 
-module.exports = app;
+export default app;

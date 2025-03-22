@@ -1,5 +1,5 @@
-const jwt = require('jsonwebtoken');
-const { UnauthorizedError } = require('../utils/errors');
+import jwt from 'jsonwebtoken';
+import { UnauthorizedError } from '../utils/errors.js';
 
 const authMiddleware = (req, res, next) => {
   // const token = req.header('Authorization')?.replace('Bearer ', '');
@@ -18,4 +18,4 @@ const authMiddleware = (req, res, next) => {
   }
 };
 
-module.exports = authMiddleware;
+export default authMiddleware;

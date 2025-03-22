@@ -1,10 +1,10 @@
-const socketIO = require('socket.io');
+import { Server as socketIO } from 'socket.io';
 
 const configureSocket = (server) => {
-  const io = socketIO(server, {
+  const io = new socketIO(server, {
     cors: {
-      origin: "*", // Permite conexiones desde cualquier origen (ajusta en producción)
-      methods: ["GET", "POST"],
+      origin: '*', // Permite conexiones desde cualquier origen (ajusta esto en producción)
+      methods: ['GET', 'POST'],
     },
   });
 
@@ -26,4 +26,4 @@ const configureSocket = (server) => {
   return io;
 };
 
-module.exports = configureSocket;
+export default configureSocket;

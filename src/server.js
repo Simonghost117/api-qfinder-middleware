@@ -1,8 +1,9 @@
-// src/server.js
-require('dotenv').config(); // Cargar variables de entorno
-const app = require('./app');
-const sequelize = require('./config/db'); // Importar sequelize desde la configuración
-const configureSocket = require('./config/socket');
+import dotenv from 'dotenv';
+import app from './app.js';
+import sequelize from './config/db.js'; // Importar sequelize desde la configuración
+import configureSocket from './config/socket.js';
+
+dotenv.config(); // Cargar variables de entorno
 
 const PORT = process.env.PORT || 3000;
 
@@ -29,5 +30,7 @@ const server = app.listen(PORT, async () => {
 // Configurar Socket.IO
 const io = configureSocket(server);
 app.set('io', io); // Hacer disponible `io` en toda la aplicación
-console.log("DB_NAME:", process.env.DB_NAME);
-module.exports = { app, server, io };
+
+console.log('DB_NAME:', process.env.DB_NAME);
+
+export { app, server, io };

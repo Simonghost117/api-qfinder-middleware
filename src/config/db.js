@@ -1,5 +1,7 @@
-const { Sequelize } = require('sequelize');
-require('dotenv').config();
+import { Sequelize } from 'sequelize';
+import dotenv from 'dotenv';
+
+dotenv.config(); // Cargar variables de entorno
 
 // Verificación de variables de entorno
 const requiredEnvVars = ['DB_NAME', 'DB_USER', 'DB_PASSWORD', 'DB_HOST', 'DB_PORT', 'NODE_ENV'];
@@ -21,10 +23,10 @@ const sequelize = new Sequelize(
     dialect: 'mysql',
     logging: process.env.NODE_ENV === 'development' ? console.log : false,
     pool: {
-      max: 5, // Máximo de conexiones
-      min: 0, // Mínimo de conexiones
-      acquire: 30000, // Tiempo máximo en ms que intentará conectar antes de fallar
-      idle: 10000, // Tiempo máximo en ms que una conexión puede estar inactiva antes de ser liberada
+      max: 5,
+      min: 0,
+      acquire: 30000,
+      idle: 10000,
     },
   }
 );
@@ -41,4 +43,4 @@ const testConnection = async () => {
 
 testConnection();
 
-module.exports = sequelize;
+export default sequelize;

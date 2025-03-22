@@ -1,9 +1,9 @@
-const { ForbiddenError } = require('../utils/errors');
+import { ForbiddenError } from '../utils/errors.js';
 
 const rolesMap = {
   Acudiente: 1,
   Cuidador: 2,
-  Entidad: 3
+  Entidad: 3,
 };
 
 const roleMiddleware = (rolesPermitidos) => {
@@ -26,4 +26,4 @@ const roleMiddleware = (rolesPermitidos) => {
   };
 };
 
-module.exports = roleMiddleware;
+export default roleMiddleware;

@@ -1,13 +1,22 @@
-const express = require('express');
-const { crearNotaMedica, obtenerNotasMedicas, actualizarNotaMedica } = require('../controllers/notaMedicaController.js');
-const authMiddleware = require('../middlewares/authMiddleware');
-const roleMiddleware = require('../middlewares/roleMiddleware');
-const validationMiddleware = require('../middlewares/validationMiddleware');
-const { validacionesCrearNotaMedica, validacionesObtenerNotasMedicas, validacionesActualizarNotaMedica } = require('../validators/notaMedicaValidations');
-const validateSchema = require('../middlewares/validatore.schema.js')
-const {NotaSchema} = require('../schema/notas.schema.js')
-const {authRequired} = require('../middlewares/validate.token.js')
+import express from 'express';
+import {
+  crearNotaMedica,
+  obtenerNotasMedicas,
+  actualizarNotaMedica
+} from '../controllers/notaMedicaController.js';
 
+import authMiddleware from '../middlewares/authMiddleware.js';
+import roleMiddleware from '../middlewares/roleMiddleware.js';
+import validationMiddleware from '../middlewares/validationMiddleware.js';
+import {
+  validacionesCrearNotaMedica,
+  validacionesObtenerNotasMedicas,
+  validacionesActualizarNotaMedica
+} from '../validators/notaMedicaValidations.js';
+
+import validateSchema from '../middlewares/validatore.schema.js';
+import { NotaSchema } from '../schema/notas.schema.js';
+import { authRequired } from '../middlewares/validate.token.js';
 
 const router = express.Router();
 
@@ -17,7 +26,7 @@ router.post(
   authRequired,
   // authMiddleware,
   // roleMiddleware(['Cuidador', 'Entidad']),
-  // validationMiddleware(validacionesCrearNotaMedica), //El error se encuentra en estas 3 lineas
+  // validationMiddleware(validacionesCrearNotaMedica),
   validateSchema(NotaSchema),
   crearNotaMedica
 );
@@ -40,4 +49,4 @@ router.put(
   actualizarNotaMedica
 );
 
-module.exports = router;
+export default router;

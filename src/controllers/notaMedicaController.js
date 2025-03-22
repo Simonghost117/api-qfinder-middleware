@@ -1,8 +1,7 @@
-const e = require('express');
-const { createNotaMedica, getNotasMedicasByPaciente, updateNotaMedica } = require('../services/notaMedicaService');
+import { createNotaMedica, getNotasMedicasByPaciente} from '../services/notaMedicaService.js';
 
 // Crear una nueva nota médica
-const crearNotaMedica = async (req, res) => {
+export const crearNotaMedica = async (req, res) => {
   const { titulo, pacienteId, contenido, imagen } = req.body;
   const autorId = req.usuario.id; // ID del usuario autenticado
 
@@ -20,7 +19,7 @@ const crearNotaMedica = async (req, res) => {
 };
 
 // Obtener notas médicas de un paciente
-const obtenerNotasMedicas = async (req, res) => {
+export const obtenerNotasMedicas = async (req, res) => {
   const { pacienteId } = req.params;
 
   try {
@@ -32,7 +31,7 @@ const obtenerNotasMedicas = async (req, res) => {
 };
 
 // Actualizar una nota médica
-const actualizarNotaMedica = async (req, res) => {
+export const actualizarNotaMedica = async (req, res) => {
   const { notaId } = req.params;
   const { titulo, contenido } = req.body;
 
@@ -47,10 +46,4 @@ const actualizarNotaMedica = async (req, res) => {
   } catch (error) {
     res.status(500).json({ message: 'Error al actualizar la nota médica' });
   }
-};
-
-module.exports = {
-  crearNotaMedica,
-  obtenerNotasMedicas,
-  actualizarNotaMedica,
 };

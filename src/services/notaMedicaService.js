@@ -1,4 +1,5 @@
-const { NotaMedica } = require('../models/notaMedica.js');
+import { NotaMedica } from '../models/notaMedica.js';
+import Usuario from '../models/usuario.js';
 
 const createNotaMedica = async (titulo, pacienteId, autorId, contenido, imagen) => {
   const notaMedica = await NotaMedica.create({
@@ -22,4 +23,4 @@ const getNotasMedicasByPaciente = async (pacienteId) => {
   return notasMedicas;
 };
 
-module.exports = { createNotaMedica, getNotasMedicasByPaciente };
+export { createNotaMedica, getNotasMedicasByPaciente };
